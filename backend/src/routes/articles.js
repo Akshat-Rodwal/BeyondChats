@@ -1,5 +1,6 @@
 // RESTful CRUD APIs for Article resource
 const express = require('express');
+const mongoose = require('mongoose');
 const Article = require('../models/Article');
 
 const router = express.Router();
@@ -18,6 +19,15 @@ router.post('/', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const { type, search, page = 1, limit = 20 } = req.query;
+    if (mongoose.connection.readyState !== 1) {
+      return res.json({
+        items: [],
+        page: Number(page),
+        limit: Number(limit),
+        total: 0,
+        pages: 0,
+      });
+    }
     const query = {};
     if (type) query.type = type;
     if (search) query.$text = { $search: search };
@@ -76,4 +86,3 @@ router.delete('/:id', async (req, res, next) => {
 });
 
 module.exports = router;
-
