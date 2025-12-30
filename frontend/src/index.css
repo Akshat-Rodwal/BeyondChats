@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+@layer components {
+    /* Scoped Article Content Styles */
+    .article-content {
+        @apply break-words;
+    }
+
+    /* Images: Responsive, rounded, proper spacing */
+    .article-content img {
+        @apply max-w-full h-auto rounded-xl shadow-md inline-block my-0;
+    }
+
+    /* SVGs: Prevent oversized icons, align with text */
+    .article-content svg {
+        @apply w-[1.1em] h-[1.1em] inline-block align-middle my-0;
+    }
+
+    /* Iframes & Embeds: Responsive container */
+    .article-content iframe,
+    .article-content video,
+    .article-content object,
+    .article-content embed {
+        @apply w-full aspect-video rounded-xl my-8 bg-gray-50;
+    }
+
+    /* Figures: Ensure they don't overflow */
+    .article-content figure {
+        @apply w-full max-w-full m-0 my-8;
+    }
+
+    .article-content figcaption {
+        @apply text-center text-sm text-gray-500 mt-3 italic;
+    }
+
+    /* Emojis & Inline Elements */
+    .article-content .emoji,
+    .article-content span[role="img"] {
+        @apply inline-block w-[1em] h-[1em] align-text-bottom;
+    }
+
+    /* Remove default margins from elements inside figures to prevent double spacing */
+    .article-content figure img {
+        @apply my-0;
+    }
+}
